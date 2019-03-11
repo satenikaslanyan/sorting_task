@@ -17,6 +17,7 @@ int main()
     std::cout << "\nSorted array in descending order is : ";
     print_array(arr, arr_size);
     std::cout << std::endl;
+    delete [] arr;
 }
 
 //This function is for checking input
