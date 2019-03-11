@@ -1,10 +1,12 @@
 #include "selection_sort.hpp"
 #include <sstream> 
+#include <assert.h>
 
 int main()
 {
     int n = get_int(1);
     int* arr = new int [n];
+    assert(arr);
     for (int i=0; i < n; ++i) { 
         arr[i] = get_int(2);  
     } 
@@ -20,18 +22,40 @@ int main()
     delete [] arr;
 }
 
+//This function checks the input is number or not
+void is_number(std::string& s, bool& fl, int i)
+{    
+     for (; i < s.size(); ++i) { 
+         if(s[i] < '0' || s[i] > '9') {
+             std::cout << "Error, invalid input" << std::endl;
+             fl = true;
+             break;
+         }
+     }
+}
+
 //This function is for checking input
-void check_input(std::string& s, bool& fl)
-{
+void check_input(std::string& s, bool& fl, const int& a)
+{   
     if (s.size() == 0) {
         std::cout << "Error, invalid input" << std::endl;
         fl = true;
     } else {
-        for (int i = 0; i < s.size(); ++i) {
-            if(s[i] < '0' || s[i] > '9') {
+        if (1 == a) {
+            if (s == "0") {
                 std::cout << "Error, invalid input" << std::endl;
                 fl = true;
-                break;
+            } else {
+                is_number(s, fl, 0);
+            }  
+        } else if (2 == a) {
+            if (s[0] == '-' || s[0] < '0' || s[0] > '9') {
+                if (s[0] == '-' && s.size() == 1) {
+                    std::cout << "Error, invalid input" << std::endl;
+                    fl = true;
+                } else {
+                    is_number(s, fl, 1);
+                }
             }
         }
     }
@@ -51,7 +75,7 @@ int get_int(const int& a)
         } 
         getline(std::cin, s);
         fl = false;
-        check_input(s, fl);
+        check_input(s, fl, a);
     } while(fl);
     std::stringstream str_int(s);
     str_int >> result;

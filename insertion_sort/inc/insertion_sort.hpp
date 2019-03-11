@@ -2,4 +2,5 @@
 void insertion_sort(int arr[], int& n, const int& k = 1);
 void print_array(int arr[], const int& n);
 int get_int(const int& a);
-void check_input(std::string& s, bool& fl);
+void check_input(std::string& s, bool& fl, const int& a);
+void is_number(std::string& s, bool& fl, int i);
